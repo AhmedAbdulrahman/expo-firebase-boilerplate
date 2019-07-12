@@ -3,7 +3,7 @@
 * path: '/environment.js' (root of your project)
 ******************************/
 
-import { Constants } from "expo";
+import Constants from 'expo-constants';
 import { Platform } from "react-native";
 
 const localhost =

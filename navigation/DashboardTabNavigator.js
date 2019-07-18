@@ -11,10 +11,8 @@ const DashboardTabNavigator = createBottomTabNavigator(
   {
     Home: {
       screen: HomeStack,
-      navigationOptions: {
-        title: 'My Bookmarks',
-        headerTitle: 'Home',
-        tabBarLabel: 'Home',
+      navigationOptions: ({ screenProps: { t } }) => ({
+        tabBarLabel: t('navigation.home'),
         tabBarIcon: ({ focused }) => (
           <TabBarIcon
             focused={focused}
@@ -25,28 +23,28 @@ const DashboardTabNavigator = createBottomTabNavigator(
             }
           />
         ),
-      },
+      }),
     },
     Profile: {
       screen: ProfileStack,
-      navigationOptions: {
-        tabBarLabel: 'Profile',
+      navigationOptions: ({ screenProps: { t } }) => ({
+        tabBarLabel: t('navigation.profile'),
         tabBarIcon: ({ focused }) => (
           <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} />
         ),
-      },
+      }),
     },
     Settings: {
       screen: SettingsStack,
-      navigationOptions: {
-        tabBarLabel: 'Settings',
+      navigationOptions: ({ screenProps: { t } }) => ({
+        tabBarLabel: t('navigation.settings'),
         tabBarIcon: ({ focused }) => (
           <TabBarIcon
             focused={focused}
             name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'}
           />
         ),
-      },
+      }),
     },
   },
   {
@@ -60,7 +58,7 @@ const DashboardTabNavigator = createBottomTabNavigator(
       accessibilityRole,
       accessibilityStates,
       ...props
-    }: any) => {
+    }) => {
       return (
         <TouchableWithoutFeedback
           onPress={onPress}

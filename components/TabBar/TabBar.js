@@ -9,6 +9,11 @@ const styles = StyleSheet.create({
     height: 50,
     borderTopWidth: 0,
     backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 12,
+    elevation: 1,
   },
 });
 

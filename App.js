@@ -4,10 +4,11 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { compose } from 'recompose';
+import { ThemeProvider } from 'styled-components';
 import { Ionicons } from '@expo/vector-icons';
 import { withAppContext, withAppProvider } from '@containers/App/AppContext';
 import AppSwitchNavigator from '@navigation/AppSwitchNavigator';
-
+import theme from './theme';
 const App = ({ skipLoadingScreen, t, name, locale, changeLocale, changeName }) => {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
   if (!isLoadingComplete && !skipLoadingScreen) {
@@ -20,18 +21,20 @@ const App = ({ skipLoadingScreen, t, name, locale, changeLocale, changeName }) =
     );
   } else {
     return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppSwitchNavigator
-          screenProps={{
-            t,
-            locale,
-            name,
-            changeLocale,
-            changeName,
-          }}
-        />
-      </View>
+      <ThemeProvider theme={theme}>
+        <View style={styles.container}>
+          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          <AppSwitchNavigator
+            screenProps={{
+              t,
+              locale,
+              name,
+              changeLocale,
+              changeName,
+            }}
+          />
+        </View>
+      </ThemeProvider>
     );
   }
 };

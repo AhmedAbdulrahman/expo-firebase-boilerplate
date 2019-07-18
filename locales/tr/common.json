@@ -1,0 +1,26 @@
+{
+  "appName": "React Native",
+  "signIn": "Giris Yap",
+  "signUp": "Kayit Ol",
+  "navigation": {
+    "home": "Anasayfa",
+    "profile": "Profil",
+    "settings": "Ayarlar"
+  },
+  "home": {
+    "welcome": "Hosgeldiniz %{appName}!",
+    "headerTitle": "Anasayfa",
+    "message": "Ana Ekran bebeğim",
+    "go": "Ayrıntılar ekranına git"
+  },
+  "settings": {
+    "display_language": "Ekran dili",
+    "about": "Hakkında",
+    "save_button": "Kayıt et"
+  },
+  "language_list": {
+    "change_language": "Dil değiştirmek ister misiniz?",
+    "ok": "Değiştir",
+    "cancel": "İptal"
+  }
+}

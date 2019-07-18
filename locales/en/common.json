@@ -1,0 +1,26 @@
+{
+  "appName": "React Native",
+  "signIn": "SignIn",
+  "signUp": "SignUp",
+  "navigation": {
+    "home": "Home",
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "home": {
+    "welcome": "Welcome to %{appName}!",
+    "headerTitle": "Home",
+    "message": "Home Screen Baby!!!",
+    "go": "Go to details screen"
+  },
+  "settings": {
+    "display_language": "Display language",
+    "about": "About",
+    "save_button": "Save"
+  },
+  "language_list": {
+    "change_language": "Do you want to change language?",
+    "ok": "Change",
+    "cancel": "Cancel"
+  }
+}

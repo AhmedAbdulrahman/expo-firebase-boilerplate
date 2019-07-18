@@ -1,0 +1,27 @@
+{
+  "appName": "رياكت نيتف",
+  "signIn": "سجل دخولك",
+  "signUp": "افتح حساب جديد",
+  "navigation": {
+    "home": "الرئيسية",
+    "profile": "بروفايل",
+    "settings": "اعدادات"
+  },
+  "home": {
+    "welcome": "اهل بك في %{appName}!",
+    "headerTitle": "الصفحة الرئيسية",
+    "message": "مش ممكن مش ممكن مش ممكن خلينا نحكي خلينا نعبر خلينا نريح ونرتاح نهائي كاس العالم",
+    "go": "انتقل إلى شاشة التفاصيل"
+  },
+  "settings": {
+    "display_language": "اعرض اللغة",
+    "about": "عن",
+    "save_button": "احفظ",
+    "name_placeholder": "اسمك"
+  },
+  "language_list": {
+    "change_language": "هل تريد تغير اللغة؟",
+    "ok": "نعم",
+    "cancel": "لا"
+  }
+}

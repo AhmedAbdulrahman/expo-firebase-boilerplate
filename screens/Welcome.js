@@ -1,29 +1,19 @@
 import React from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button, Text } from 'react-native';
 import { screens } from '@navigation/constants';
 
-class Welcome extends React.Component {
-  static navigationOptions = {
-    header: null,
-  };
+const Welcome = ({ navigation, screenProps: { t } }) => (
+  <View style={styles.container}>
+    <Text style={styles.welcome}>{t('home.welcome', { appName: t('appName') })}</Text>
+    <Button title={t('signIn')} onPress={() => navigation.navigate(screens.signIn)} />
+    <Button title={t('signUp')} onPress={() => navigation.navigate(screens.signUp)} />
+  </View>
+);
 
-  signIn = async () => {
-    this.props.navigation.navigate(screens.signIn);
-  };
+Welcome.navigationOptions = {
+  header: null,
+};
 
-  signUp = async () => {
-    this.props.navigation.navigate(screens.signUp);
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Button title="Sign In" onPress={this.signIn} />
-        <Button title="Sign Up" onPress={this.signUp} />
-      </View>
-    );
-  }
-}
 export default Welcome;
 
 const styles = StyleSheet.create({

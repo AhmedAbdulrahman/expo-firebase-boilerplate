@@ -2,6 +2,7 @@
   "appName": "React Native",
   "signIn": "SignIn",
   "signUp": "SignUp",
+  "signOut": "Sign Out",
   "navigation": {
     "home": "Home",
     "profile": "Profile",

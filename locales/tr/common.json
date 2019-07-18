@@ -2,6 +2,7 @@
   "appName": "React Native",
   "signIn": "Giris Yap",
   "signUp": "Kayit Ol",
+  "signOut": "Oturumu Kapat",
   "navigation": {
     "home": "Anasayfa",
     "profile": "Profil",

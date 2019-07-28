@@ -1,21 +1,21 @@
 import React from 'react';
-import { loadSettings } from '@storage/settingsStorage';
+import { loadSettings, saveSettings } from '@storage/settingsStorage';
 import i18n from '@i18n';
 
 export const defaultState = {
   locale: i18n.locale,
-  name: '',
+  dark: false,
 };
 
 export default (initialState = defaultState) => {
   const [locale, setLocale] = React.useState(initialState.locale);
-  const [name, setName] = React.useState(initialState.name);
+  const [darkMode, setDarkMode] = React.useState(initialState.dark);
 
   async function getSettings() {
     // We can await here
     const loadInitialState = await loadSettings();
     setLocale(loadInitialState.locale);
-    setName(loadInitialState.name);
+    setDarkMode(loadInitialState.dark);
   }
   // Side effects
   React.useEffect(() => {
@@ -24,16 +24,22 @@ export default (initialState = defaultState) => {
 
   // Event handlers
   const changeLocale = locale => setLocale(locale);
-  const changeName = name => setName(name);
   const t = (scope, options) => i18n.t(scope, { locale: locale, ...options });
+
+  const toggleTheme = () => {
+    const dark = !darkMode;
+
+    saveSettings({ locale, dark });
+    setDarkMode(dark);
+  };
 
   return {
     // State props
     locale,
-    name,
+    darkMode,
     // Handler props
     changeLocale,
-    changeName,
+    toggleTheme,
     t,
   };
 };

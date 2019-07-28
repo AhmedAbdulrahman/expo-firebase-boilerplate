@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native';
 const STORAGE_KEY = 'SETTINGS';
 
 const DEFAULT_SETTINGS = {
-  name: '',
+  dark: false,
   locale: 'en',
 };
 

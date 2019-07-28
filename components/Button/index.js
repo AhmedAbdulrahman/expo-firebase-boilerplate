@@ -1,21 +1,50 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 
-export const Button = styled.TouchableOpacity`
+export default Button = styled.TouchableOpacity`
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
   elevation: 1;
   border-radius: 2;
-  background-color: ${({ theme }) => theme.palette.common.black};
   padding: 14px;
-  height: 40px;
+  width: 100%;
+  background-color: ${({ theme }) => theme.palette.text.primary};
+  ${props =>
+    props.primary &&
+    css`
+      background-color: ${props.theme.palette.primary.main};
+    `}
+  ${props =>
+    props.secondary &&
+    css`
+      background-color: ${props.theme.palette.secondary.main};
+    `}
+  ${props =>
+    props.disabled &&
+    css`
+      background-color: ${props.theme.palette.action.disabledBackground};
+    `};
 `;
 
 export const ButtonText = styled.Text`
   text-align: center;
-  font-family: ${({ theme }) => theme.font.cera[700]};
   font-size: 14;
   letter-spacing: ${() => 11 * 0.1};
   text-transform: uppercase;
-  color: ${({ theme }) => theme.palette.common.white};
+  color: ${({ theme }) => theme.palette.getContrastText(theme.palette.text.primary)};
+  ${props =>
+    props.primary &&
+    css`
+      color: ${props.theme.palette.primary.light};
+    `};
+  ${props =>
+    props.secondary &&
+    css`
+      color: ${props.theme.palette.secondary.light};
+    `};
+  ${props =>
+    props.disabled &&
+    css`
+      color: ${props.theme.palette.action.disabled};
+    `};
 `;

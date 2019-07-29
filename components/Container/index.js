@@ -5,4 +5,5 @@ export default Container = styled.View`
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) => theme.palette.background.default};
+  margin-horizontal: ${props => (props.marginHorizontal ? props.marginHorizontal : '20px')};
 `;

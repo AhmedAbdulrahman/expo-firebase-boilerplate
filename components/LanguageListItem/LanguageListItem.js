@@ -1,6 +1,8 @@
 import React from 'react';
-import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { withTheme } from 'styled-components';
+import { Body, Label } from '@components/Text';
 
 class LanguageListItem extends React.Component {
   handleLocaleChange = () => {
@@ -21,13 +23,24 @@ class LanguageListItem extends React.Component {
     return (
       <TouchableOpacity style={styles.listItem} onPress={this.handleLocaleChange}>
         <View style={styles.textWrapper}>
-          <Text style={[styles.title, this.props.isActive && styles.active]}>
+          <Body
+            style={{
+              color: this.props.isActive
+                ? this.props.theme.palette.primary.main
+                : this.props.theme.palette.text.primary,
+            }}>
             {this.props.name}
-          </Text>
-          {this.props.englishName && <Text style={styles.subtitle}>{this.props.englishName}</Text>}
+          </Body>
+          {this.props.englishName && (
+            <Label style={styles.subtitle}>{this.props.englishName}</Label>
+          )}
         </View>
         {this.props.isActive && (
-          <Ionicons style={styles.active} name="ios-checkmark-circle-outline" size={30} />
+          <Ionicons
+            color={this.props.theme.palette.primary.main}
+            name="ios-checkmark-circle-outline"
+            size={30}
+          />
         )}
       </TouchableOpacity>
     );
@@ -42,19 +55,14 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   textWrapper: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     width: '90%',
     marginLeft: 10,
-  },
-  title: {
-    fontSize: 18,
-    color: '#434343',
   },
   subtitle: {
     color: '#AAAAAA',
   },
-  active: {
-    color: '#03a87c',
-  },
 });
 
-export default LanguageListItem;
+export default withTheme(LanguageListItem);

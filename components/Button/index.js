@@ -7,6 +7,7 @@ export default Button = styled.TouchableOpacity`
   elevation: 1;
   border-radius: 2;
   padding: 14px;
+  margin-bottom: ${props => (props.marginBottom ? props.marginBottom : '10px')};
   width: 100%;
   background-color: ${({ theme }) => theme.palette.text.primary};
   ${props =>
@@ -28,7 +29,7 @@ export default Button = styled.TouchableOpacity`
 
 export const ButtonText = styled.Text`
   text-align: center;
-  font-size: 14;
+  font-size: 15px;
   letter-spacing: ${() => 11 * 0.1};
   text-transform: uppercase;
   color: ${({ theme }) => theme.palette.getContrastText(theme.palette.text.primary)};

@@ -6,7 +6,8 @@
   "navigation": {
     "home": "Anasayfa",
     "profile": "Profil",
-    "settings": "Ayarlar"
+    "settings": "Ayarlar",
+    "details": "Ayrıntılar"
   },
   "home": {
     "welcome": "Hosgeldiniz %{appName}!",

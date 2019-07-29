@@ -6,7 +6,8 @@
   "navigation": {
     "home": "الرئيسية",
     "profile": "بروفايل",
-    "settings": "اعدادات"
+    "settings": "اعدادات",
+    "details": "تفاصيل"
   },
   "home": {
     "welcome": "اهل بك في %{appName}!",

@@ -6,7 +6,8 @@
   "navigation": {
     "home": "Home",
     "profile": "Profile",
-    "settings": "Settings"
+    "settings": "Settings",
+    "details": "Details"
   },
   "home": {
     "welcome": "Welcome to %{appName}!",

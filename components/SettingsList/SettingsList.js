@@ -13,21 +13,17 @@ const settings = [
   },
 ];
 
-class SettingsList extends React.Component {
-  render() {
-    return (
-      <View>
-        {settings.map(item => (
-          <SettingsListItem
-            key={item.name}
-            title={this.props.t(item.name)}
-            locale={this.props.locale}
-            onPress={() => this.props.onPressItem(item.screen)}
-          />
-        ))}
-      </View>
-    );
-  }
-}
+const SettingsList = ({ t, locale, onPressItem }) => (
+  <View>
+    {settings.map(item => (
+      <SettingsListItem
+        key={item.name}
+        title={t(item.name)}
+        locale={locale}
+        onPress={() => onPressItem(item.screen)}
+      />
+    ))}
+  </View>
+);
 
 export default SettingsList;

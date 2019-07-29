@@ -10,4 +10,5 @@ export const screens = {
   drawer: 'DrawerNavigator',
   settings: 'Settings',
   profile: 'Profile',
+  language: 'LanguageSelector',
 };

@@ -1,36 +1,53 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 import MenuDrawerButton from '@components/MenuDrawerButton';
+import { screens } from './constants';
 import { Home, Detail } from '@screens';
 
 const HomeStack = createStackNavigator(
   {
-    Home: {
+    [screens.home]: {
       screen: Home,
-      navigationOptions: ({ screenProps: { t, locale } }) => ({
-        headerTitle: t('navigation.home'),
-        ...(locale === 'ar'
-          ? {
-              headerRight: <MenuDrawerButton />,
-              headerRightContainerStyle: {
-                paddingRight: 10,
-              },
-            }
-          : {
-              headerLeft: <MenuDrawerButton />,
-              headerLeftContainerStyle: {
-                paddingLeft: 10,
-              },
-            }),
-      }),
+      navigationOptions: ({ screenProps: { t, theme, locale } }) => {
+        return {
+          headerTitle: t('navigation.home'),
+          ...(locale === 'ar'
+            ? {
+                headerRight: <MenuDrawerButton color={theme.palette.text.primary} />,
+                headerRightContainerStyle: {
+                  paddingRight: 10,
+                },
+              }
+            : {
+                headerLeft: <MenuDrawerButton color={theme.palette.text.primary} />,
+                headerLeftContainerStyle: {
+                  paddingLeft: 10,
+                },
+              }),
+        };
+      },
     },
-    Detail: {
+    [screens.detail]: {
       screen: Detail,
+      navigationOptions: ({ screenProps: { t } }) => {
+        return {
+          headerTitle: t('navigation.details'),
+        };
+      },
     },
   },
   {
-    defaultNavigationOptions: {
-      gesturesEnabled: false,
+    defaultNavigationOptions: ({ screenProps: { theme } }) => {
+      return {
+        gesturesEnabled: false,
+
+        headerStyle: {
+          backgroundColor: theme.palette.background.default,
+        },
+        headerTitleStyle: {
+          color: theme.palette.text.primary,
+        },
+      };
     },
   }
 );

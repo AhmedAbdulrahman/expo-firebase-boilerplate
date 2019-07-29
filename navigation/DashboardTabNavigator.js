@@ -3,80 +3,124 @@ import { Platform, TouchableWithoutFeedback, View } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
 import TabBarIcon from '@components/TabBarIcon';
 import TabBar from '@components/TabBar';
+import { Label } from '@components/Text';
 import HomeStack from './HomeStack';
 import ProfileStack from './ProfileStack';
 import SettingsStack from './SettingsStack';
+import { screens } from './constants';
 
 const DashboardTabNavigator = createBottomTabNavigator(
   {
-    Home: {
+    [screens.home]: {
       screen: HomeStack,
-      navigationOptions: ({ screenProps: { t } }) => ({
-        tabBarLabel: t('navigation.home'),
-        tabBarIcon: ({ focused }) => (
-          <TabBarIcon
-            focused={focused}
-            name={
-              Platform.OS === 'ios'
-                ? `ios-information-circle${focused ? '' : '-outline'}`
-                : 'md-information-circle'
-            }
-          />
-        ),
-      }),
     },
-    Profile: {
+    [screens.profile]: {
       screen: ProfileStack,
-      navigationOptions: ({ screenProps: { t } }) => ({
-        tabBarLabel: t('navigation.profile'),
-        tabBarIcon: ({ focused }) => (
-          <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} />
-        ),
-      }),
     },
-    Settings: {
+    [screens.settings]: {
       screen: SettingsStack,
-      navigationOptions: ({ screenProps: { t } }) => ({
-        tabBarLabel: t('navigation.settings'),
-        tabBarIcon: ({ focused }) => (
-          <TabBarIcon
-            focused={focused}
-            name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'}
-          />
-        ),
-      }),
     },
   },
   {
-    tabBarComponent: TabBar,
-    tabBarButtonComponent: ({
-      children,
-      onPress,
-      onLongPress,
-      testID,
-      accessibilityLabel,
-      accessibilityRole,
-      accessibilityStates,
-      ...props
-    }) => {
-      return (
-        <TouchableWithoutFeedback
-          onPress={onPress}
-          onLongPress={onLongPress}
-          testID={testID}
-          hitSlop={{ top: 5, right: 15, bottom: 15, left: 15 }}
-          accessibilityLabel={accessibilityLabel}
-          accessibilityRole={accessibilityRole}
-          accessibilityStates={accessibilityStates}>
-          <View {...props}>{children}</View>
-        </TouchableWithoutFeedback>
-      );
-    },
-    navigationOptions: ({ navigation }) => {
+    defaultNavigationOptions: ({ navigation, screenProps: { t } }) => {
       const { routeName } = navigation.state.routes[navigation.state.index];
+
       return {
-        header: null,
-        headerTitle: routeName,
+        tabBarIcon: ({ focused }) => {
+          switch (routeName) {
+            case screens.home:
+            case screens.detail: {
+              return (
+                <TabBarIcon
+                  focused={focused}
+                  name={
+                    Platform.OS === 'ios'
+                      ? `ios-information-circle${focused ? '' : '-outline'}`
+                      : 'md-information-circle'
+                  }
+                />
+              );
+            }
+            case screens.profile: {
+              return (
+                <TabBarIcon
+                  focused={focused}
+                  name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'}
+                />
+              );
+            }
+            case screens.settings:
+            case screens.language: {
+              return (
+                <TabBarIcon
+                  focused={focused}
+                  name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'}
+                />
+              );
+            }
+          }
+        },
+        tabBarLabel: ({ focused }) => {
+          switch (routeName) {
+            case screens.home:
+            case screens.detail:
+              return (
+                <Label focused={focused} center>
+                  {t('navigation.home')}
+                </Label>
+              );
+            case screens.profile:
+              return (
+                <Label focused={focused} center>
+                  {t('navigation.profile')}
+                </Label>
+              );
+            case screens.settings:
+            case screens.language:
+              return (
+                <Label focused={focused} center>
+                  {t('navigation.settings')}
+                </Label>
+              );
+            default:
+              return null;
+          }
+        },
+        tabBarComponent: TabBar,
+        tabBarOptions: {
+          // Feel free to enable/disable option by uncommeting lines below
+          // showLabel: false, // hide labels
+          // activeTintColor: '#F8F8F8', // active icon color
+          // inactiveTintColor: '#586589',  // inactive icon color
+          // style: {
+          //   // backgroundColor: '#171F33' // Change TabBar background or you can modify TabBar component file
+          //   justifyContent: 'center',
+          //   textAlign: 'center',
+          // },
+        },
+        tabBarButtonComponent: ({
+          children,
+          onPress,
+          onLongPress,
+          testID,
+          accessibilityLabel,
+          accessibilityRole,
+          accessibilityStates,
+          ...props
+        }) => {
+          return (
+            <TouchableWithoutFeedback
+              onPress={onPress}
+              onLongPress={onLongPress}
+              testID={testID}
+              hitSlop={{ top: 5, right: 15, bottom: 15, left: 15 }}
+              accessibilityLabel={accessibilityLabel}
+              accessibilityRole={accessibilityRole}
+              accessibilityStates={accessibilityStates}>
+              <View {...props}>{children}</View>
+            </TouchableWithoutFeedback>
+          );
+        },
       };
     },
   }

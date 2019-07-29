@@ -4,11 +4,18 @@ import MenuDrawer from '@components/MenuDrawer';
 
 const DashboardStackNavigator = createStackNavigator(
   {
-    DashboardTabNavigator: DashboardTabNavigator,
+    DashboardTabNavigator: {
+      screen: DashboardTabNavigator,
+    },
   },
   {
-    defaultNavigationOptions: {
-      headerLeft: MenuDrawer,
+    defaultNavigationOptions: ({ navigation }) => {
+      const { routeName } = navigation.state.routes[navigation.state.index];
+      return {
+        header: null,
+        // headerRight: MenuDrawer,
+        headerTitle: routeName,
+      };
     },
   }
 );

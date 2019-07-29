@@ -1,16 +1,19 @@
-import { AppLoading } from 'expo';
-import { Asset } from 'expo-asset';
-import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { compose } from 'recompose';
 import { ThemeProvider } from 'styled-components';
+import { AppLoading } from 'expo';
+import { Asset } from 'expo-asset';
+import * as Font from 'expo-font';
+import Constants from 'expo-constants';
 import { Ionicons } from '@expo/vector-icons';
 import { withAppContext, withAppProvider } from '@containers/App/AppContext';
 import AppSwitchNavigator from '@navigation/AppSwitchNavigator';
-import theme from './theme';
-const App = ({ skipLoadingScreen, t, name, locale, changeLocale, changeName }) => {
+import createTheme from '@components/styles/createTheme';
+
+const App = ({ skipLoadingScreen, t, locale, changeLocale, toggleTheme, darkMode }) => {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
+
   if (!isLoadingComplete && !skipLoadingScreen) {
     return (
       <AppLoading
@@ -21,16 +24,22 @@ const App = ({ skipLoadingScreen, t, name, locale, changeLocale, changeName }) =
     );
   } else {
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider
+        theme={createTheme({
+          palette: {
+            type: darkMode ? 'dark' : 'light',
+          },
+        })}>
         <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          <StatusBar barStyle={darkMode ? 'light-content' : 'dark-content'} />
           <AppSwitchNavigator
             screenProps={{
               t,
               locale,
-              name,
               changeLocale,
-              changeName,
+              toggleTheme,
+              darkMode,
+              isLoadingComplete,
             }}
           />
         </View>
@@ -55,7 +64,8 @@ async function loadResourcesAsync() {
       ...Ionicons.font,
       // We include SpaceMono because we use it in HomeScreen.js. Feel free to
       // remove this if you are not using it in your app
-      'space-mono': require('@assets/fonts/SpaceMono-Regular.ttf'),
+      'SpaceMono ': require('@assets/fonts/SpaceMono-Regular.ttf'),
+      // 'space-mono': require('@assets/fonts/SpaceMono-Bold.ttf'),
     }),
   ]);
 }
@@ -74,5 +84,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  statusbar: {
+    height: Platform.select({
+      android: Constants.statusBarHeight,
+      ios: Platform.Version < 11 ? Constants.statusBarHeight : 0,
+    }),
   },
 });

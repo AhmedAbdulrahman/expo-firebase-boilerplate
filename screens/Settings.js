@@ -1,55 +1,54 @@
 import React from 'react';
-import { View, StyleSheet, Button, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import Container from '@components/Container';
+import { BodyBold } from '@components/Text';
 import { saveSettings } from '@storage/settingsStorage';
 import SettingsList from '@components/SettingsList';
 import { screens } from '@navigation/constants';
 import { usePrevious } from '@hooks/usePrevious';
+import i18n from '@i18n';
 
-const Settings = ({ navigation, screenProps: { t, locale, name, changeLocale } }) => {
+const Settings = ({ navigation, screenProps: { t, locale, changeLocale, theme } }) => {
   //get the previous props or state
-  const prevState = usePrevious({ name, locale });
+  const prevState = usePrevious({ locale });
 
-  const updateLocale = () => {
+  const updateLocale = React.useCallback(() => {
     const navigationLocale = navigation.getParam('locale', null);
     if (navigationLocale && prevState.locale !== navigationLocale) {
-      locale = navigationLocale;
+      i18n.locale = navigationLocale;
       changeLocale(navigationLocale);
     }
-  };
+  }, [changeLocale, navigation, prevState]);
 
   React.useEffect(() => {
     updateLocale();
-  });
+  }, [updateLocale]);
 
   return (
-    <View style={styles.container}>
+    <Container marginHorizontal="0">
       <ScrollView style={styles.scrollView}>
         <View style={styles.inputContainer}>
           <SettingsList
             t={t}
             locale={locale}
             onPressItem={screen => navigation.navigate(screen, { currentLocale: locale })}
+            style={{ marginBottom: 30 }}
           />
-          <Button title={t('signOut')} onPress={() => navigation.navigate(screens.welcome)} />
+          <BodyBold onPress={() => navigation.navigate(screens.signIn)}>{t('signOut')}</BodyBold>
         </View>
         <View style={styles.inputContainer}>
-          <Button
-            title={t('settings.save_button')}
-            onPress={() => saveSettings({ name, locale })}
-          />
+          <BodyBold onPress={() => saveSettings({ locale, dark: theme })}>
+            {t('settings.save_button')}
+          </BodyBold>
         </View>
       </ScrollView>
-    </View>
+    </Container>
   );
 };
 
 export default Settings;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // paddingTop: 45,
-  },
   scrollView: {
     flex: 1,
     flexDirection: 'column',
@@ -57,6 +56,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     paddingTop: 15,
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

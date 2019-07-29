@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import Container from '@components/Container';
+import { BodyBold } from '@components/Text';
 
-const Detail = props => (
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text>Detail</Text>
-  </View>
+const Detail = ({ screenProps: { t } }) => (
+  <Container>
+    <BodyBold>{t('navigation.details')}</BodyBold>
+  </Container>
 );
 export default Detail;

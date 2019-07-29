@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import Container from '@components/Container';
+import { HeaderMain } from '@components/Text';
 
 class Profile extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Screen2</Text>
-      </View>
+      <Container>
+        <HeaderMain>Screen2</HeaderMain>
+      </Container>
     );
   }
 }
 export default Profile;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

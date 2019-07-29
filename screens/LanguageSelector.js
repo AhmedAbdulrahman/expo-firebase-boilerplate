@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import LanguageListItem from '@components/LanguageListItem';
+import Container from '@components/Container';
 
 const languages = [
   {
@@ -21,8 +22,9 @@ const languages = [
 
 const LanguageSelector = ({ navigation, screenProps: { t } }) => {
   const currentLocale = navigation.getParam('currentLocale');
+
   return (
-    <View style={styles.container}>
+    <Container style={styles.container} marginHorizontal="0">
       {languages.map(language => (
         <LanguageListItem
           key={language.locale}
@@ -34,7 +36,7 @@ const LanguageSelector = ({ navigation, screenProps: { t } }) => {
           onChangeLocale={locale => navigation.navigate('Settings', { locale })}
         />
       ))}
-    </View>
+    </Container>
   );
 };
 
@@ -44,7 +46,8 @@ LanguageSelector.navigationOptions = ({ screenProps: { t } }) => ({
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 15,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
   },
 });
 export default LanguageSelector;

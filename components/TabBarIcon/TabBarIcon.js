@@ -7,9 +7,9 @@ const TabBarIcon = props => {
   return (
     <Ionicons
       name={props.name}
-      size={26}
+      size={25}
       style={styles.icon}
-      color={props.focused ? theme.palette.common.black : theme.palette.common.grey}
+      color={props.focused ? props.theme.palette.primary.accent : props.theme.palette.text.hint}
     />
   );
 };

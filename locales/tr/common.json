@@ -1,7 +1,5 @@
 {
   "appName": "React Native",
-  "signIn": "Giris Yap",
-  "signUp": "Kayit Ol",
   "signOut": "Oturumu Kapat",
   "navigation": {
     "home": "Anasayfa",
@@ -24,5 +22,17 @@
     "change_language": "Dil değiştirmek ister misiniz?",
     "ok": "Değiştir",
     "cancel": "İptal"
+  },
+  "login": {
+    "title": "Hesaba giriş yapın",
+    "register": "Yeni müşteri? Buraya kayıt ol",
+    "forgotPassword": "Parolanızı mı unuttunuz?",
+    "cta": "Giriş yap"
+  },
+  "register": {
+    "title": "Kayıt olmak",
+    "login": "Hesabın var mı? Giriş yap",
+    "terms": "<2> Şartlar ve koşullar </2> 'ı okudum ve anladım",
+    "cta": "Hesap oluştur"
   }
 }

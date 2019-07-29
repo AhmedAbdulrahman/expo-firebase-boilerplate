@@ -1,7 +1,5 @@
 {
   "appName": "React Native",
-  "signIn": "SignIn",
-  "signUp": "SignUp",
   "signOut": "Sign Out",
   "navigation": {
     "home": "Home",
@@ -24,5 +22,17 @@
     "change_language": "Do you want to change language?",
     "ok": "Change",
     "cancel": "Cancel"
+  },
+  "login": {
+    "title": "Login to account",
+    "register": "New customer? Register here",
+    "forgotPassword": "Forgot your password?",
+    "cta": "Sign in"
+  },
+  "register": {
+    "title": "Register",
+    "login": "Have an account? Sign in",
+    "terms": "I have read and understood the <2>Terms and conditions</2>",
+    "cta": "Create an account"
   }
 }

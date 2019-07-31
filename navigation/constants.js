@@ -11,4 +11,6 @@ export const screens = {
   settings: 'Settings',
   profile: 'Profile',
   language: 'LanguageSelector',
+  dashboard: 'Dashboard',
+  dashboardTabNavigator: 'DashboardTabNavigator',
 };

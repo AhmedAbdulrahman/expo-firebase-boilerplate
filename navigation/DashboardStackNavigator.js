@@ -1,10 +1,10 @@
 import { createStackNavigator } from 'react-navigation';
 import DashboardTabNavigator from './DashboardTabNavigator';
-import MenuDrawer from '@components/MenuDrawer';
+import { screens } from './constants';
 
 const DashboardStackNavigator = createStackNavigator(
   {
-    DashboardTabNavigator: {
+    [screens.dashboardTabNavigator]: {
       screen: DashboardTabNavigator,
     },
   },
@@ -13,7 +13,6 @@ const DashboardStackNavigator = createStackNavigator(
       const { routeName } = navigation.state.routes[navigation.state.index];
       return {
         header: null,
-        // headerRight: MenuDrawer,
         headerTitle: routeName,
       };
     },

@@ -8,13 +8,13 @@ import * as Font from 'expo-font';
 import Constants from 'expo-constants';
 import { Ionicons } from '@expo/vector-icons';
 import { withAppContext, withAppProvider } from '@containers/App/AppContext';
+import { withAuthentication } from './hocs/sessions';
 import AppSwitchNavigator from '@navigation/AppSwitchNavigator';
 import createTheme from '@components/styles/createTheme';
 
-const App = ({ skipLoadingScreen, t, locale, changeLocale, toggleTheme, darkMode }) => {
+const App = props => {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
-
-  if (!isLoadingComplete && !skipLoadingScreen) {
+  if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
       <AppLoading
         startAsync={loadResourcesAsync}
@@ -27,22 +27,18 @@ const App = ({ skipLoadingScreen, t, locale, changeLocale, toggleTheme, darkMode
       <ThemeProvider
         theme={createTheme({
           palette: {
-            type: darkMode ? 'dark' : 'light',
+            type: props.darkMode ? 'dark' : 'light',
           },
         })}>
         <View style={styles.container}>
           <StatusBar
             style={styles.statusbar}
-            barStyle={darkMode ? 'light-content' : 'dark-content'}
+            barStyle={props.darkMode ? 'light-content' : 'dark-content'}
           />
           <AppSwitchNavigator
             screenProps={{
-              t,
-              locale,
-              changeLocale,
-              toggleTheme,
-              darkMode,
-              isLoadingComplete,
+              ...props,
+              // isLoadingComplete,
             }}
           />
         </View>
@@ -53,7 +49,8 @@ const App = ({ skipLoadingScreen, t, locale, changeLocale, toggleTheme, darkMode
 
 export default compose(
   withAppProvider(),
-  withAppContext()
+  withAppContext(),
+  withAuthentication
 )(App);
 
 async function loadResourcesAsync() {

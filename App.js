@@ -31,7 +31,10 @@ const App = ({ skipLoadingScreen, t, locale, changeLocale, toggleTheme, darkMode
           },
         })}>
         <View style={styles.container}>
-          <StatusBar barStyle={darkMode ? 'light-content' : 'dark-content'} />
+          <StatusBar
+            style={styles.statusbar}
+            barStyle={darkMode ? 'light-content' : 'dark-content'}
+          />
           <AppSwitchNavigator
             screenProps={{
               t,

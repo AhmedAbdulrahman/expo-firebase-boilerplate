@@ -3,18 +3,23 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { withTheme } from 'styled-components';
 import AppDrawerNavigator from './AppDrawerNavigator';
 import { screens } from './constants';
-import { SignUp, SignIn } from '@screens';
+import { SignUp, SignIn, AuthLoading } from '@screens';
 
-const AppSwitchNavigator = createStackNavigator({
-  [screens.signIn]: SignIn,
-  [screens.signUp]: SignUp,
-  Dashboard: {
-    screen: AppDrawerNavigator,
-    navigationOptions: {
-      header: null,
-    },
+const AppSwitchNavigator = createStackNavigator(
+  {
+    [screens.signIn]: SignIn,
+    [screens.signUp]: SignUp,
+    [screens.dashboard]: AppDrawerNavigator,
+    [screens.authLoading]: AuthLoading,
   },
-});
+  {
+    initialRouteName: screens.authLoading,
+    defaultNavigationOptions: {
+      header: null,
+      gesturesEnabled: false,
+    },
+  }
+);
 
 const Navigation = createAppContainer(AppSwitchNavigator);
 

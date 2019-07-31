@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
+import { compose } from 'recompose';
+import { withAppContext } from '@containers/App/AppContext';
 import Container from '@components/Container';
 import { BodyBold } from '@components/Text';
 import { saveSettings } from '@storage/settingsStorage';
@@ -8,7 +10,7 @@ import { screens } from '@navigation/constants';
 import { usePrevious } from '@hooks/usePrevious';
 import i18n from '@i18n';
 
-const Settings = ({ navigation, screenProps: { t, locale, changeLocale, theme } }) => {
+const Settings = ({ navigation, screenProps: { t, locale, changeLocale, theme }, firebase }) => {
   //get the previous props or state
   const prevState = usePrevious({ locale });
 
@@ -25,18 +27,24 @@ const Settings = ({ navigation, screenProps: { t, locale, changeLocale, theme } 
   }, [updateLocale]);
 
   return (
-    <Container marginHorizontal="0">
+    <Container paddingHorizontal={0} paddingVertical={5}>
       <ScrollView style={styles.scrollView}>
-        <View style={styles.inputContainer}>
+        <View>
           <SettingsList
             t={t}
             locale={locale}
             onPressItem={screen => navigation.navigate(screen, { currentLocale: locale })}
             style={{ marginBottom: 30 }}
           />
-          <BodyBold onPress={() => navigation.navigate(screens.signIn)}>{t('signOut')}</BodyBold>
         </View>
         <View style={styles.inputContainer}>
+          <BodyBold
+            onPress={() => {
+              firebase.doSignOut();
+              navigation.navigate(screens.signIn);
+            }}>
+            {t('signOut')}
+          </BodyBold>
           <BodyBold onPress={() => saveSettings({ locale, dark: theme })}>
             {t('settings.save_button')}
           </BodyBold>
@@ -46,7 +54,7 @@ const Settings = ({ navigation, screenProps: { t, locale, changeLocale, theme } 
   );
 };
 
-export default Settings;
+export default compose(withAppContext())(Settings);
 
 const styles = StyleSheet.create({
   scrollView: {

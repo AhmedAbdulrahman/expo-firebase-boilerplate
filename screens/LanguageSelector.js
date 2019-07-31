@@ -24,7 +24,7 @@ const LanguageSelector = ({ navigation, screenProps: { t } }) => {
   const currentLocale = navigation.getParam('currentLocale');
 
   return (
-    <Container style={styles.container} marginHorizontal="0">
+    <Container style={styles.container} paddingHorizontal={0}>
       {languages.map(language => (
         <LanguageListItem
           key={language.locale}

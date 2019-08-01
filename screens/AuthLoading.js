@@ -23,7 +23,6 @@ class AuthLoadingScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ActivityIndicator />
-        <StatusBar barStyle="default" />
       </View>
     );
   }
